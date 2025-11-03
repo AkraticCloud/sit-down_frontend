@@ -1,0 +1,19 @@
+.app {
+  font-family: 'Roboto', sans-serif;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 2rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+}
