@@ -1,0 +1,62 @@
+import { useEffect } from 'react';
+import '@material/web/button/filled-button.js';
+import '@material/web/button/text-button.js';
+import '@material/web/textfield/filled-text-field.js';
+import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+import './LoginPage.css';
+
+function LoginPage() {
+  useEffect(() => {
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  }, []);
+
+  return (
+    <div className="login-page">
+      {/* Logo */}
+      <div className="logo-container">
+        <div className="logo-circle">
+          <svg className="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M8.1 13.34l2.83-2.83L3.91 3.5c-1.56 1.56-1.56 4.09 0 5.66l4.19 4.18zm6.78-1.81c1.53.71 3.68.21 5.27-1.38 1.91-1.91 2.28-4.65.81-6.12-1.46-1.46-4.2-1.1-6.12.81-1.59 1.59-2.09 3.74-1.38 5.27L3.7 19.87l1.41 1.41L12 14.41l6.88 6.88 1.41-1.41L13.41 13l1.47-1.47z"
+              fill="white"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <h1 className="md-typescale-display-medium main-title">Sit Down</h1>
+
+      <p className="md-typescale-body-large tagline">
+        Log in to continue discovering new dining spots
+      </p>
+
+      <form className="login-form">
+        <md-filled-text-field
+          label="Email"
+          type="email"
+          class="login-input"
+          required
+        ></md-filled-text-field>
+
+        <md-filled-text-field
+          label="Password"
+          type="password"
+          class="login-input"
+          required
+        ></md-filled-text-field>
+
+        <div className="login-button-wrapper">
+          <md-filled-button class="login-button">
+            Login
+          </md-filled-button>
+        </div>
+
+        <md-text-button class="guest-button">
+          Continue as Guest
+        </md-text-button>
+      </form>
+    </div>
+  );
+}
+
+export default LoginPage;
