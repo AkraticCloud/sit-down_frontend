@@ -1,0 +1,124 @@
+#root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.app-home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin: 3rem;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    background: #fef9f5;
+}
+
+.restaurant-card {
+    background: white;
+    width: 340px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+.restaurant-card:hover .restaurant-image {
+    transform: scale(1.02);
+}
+
+.restaurant-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.restaurant-card.swipe-left {
+    transform: translateX(-350px) rotate(-10deg);
+    opacity: 0;
+}
+
+.restaurant-card.swipe-right {
+    transform: translateX(350px) rotate(10deg);
+    opacity: 0;
+}
+
+/* cubic-bezier source; https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/easing-function/cubic-bezier*/
+.restaurant-card.swipe-reset {
+    transform: translateX(0) rotate (0deg);
+    opacity: 1;
+    animation: cardPopRight 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+
+}
+
+.restaurant-card.enter-from-left {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+    animation: cardPopLeft 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes cardPopRight {
+    0% {
+        transform: translateX(120px) scale(0.8) rotate(5deg);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(-15px) scale(1.05) rotate(-2deg);
+        opacity: 1;
+    }
+    70% {
+        transform: translateX(8px) scale(0.98) rotate(1deg);
+    }
+    100% {
+        transform: translateX(0) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes cardPopLeft {
+    0% {
+        transform: translateX(-120px) scale(0.8) rotate(-5deg);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(15px) scale(1.05) rotate(2deg);
+        opacity: 1;
+    }
+    70% {
+        transform: translateX(-8px) scale(0.98) rotate(-1deg);
+    }
+    100% {
+        transform: translateX(0) scale(1) rotate(0deg);
+    }
+}
+
+.restaurant-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.location-input {
+    margin-top: 12px;
+}
+
+.nav-buttons {
+    margin-top: 16px;
+    display: flex;
+    gap: 13px;
+    justify-content: center;
+}
+
+
+.buttons {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.buddy-mode {
+    margin-top: 12px;
+}
