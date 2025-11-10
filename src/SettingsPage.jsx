@@ -1,18 +1,14 @@
-import React from 'react';
-import {Save, X} from 'lucide-react';
+import React, {useState}from 'react';
+import {Save, X, LogOut, Settings, User, Lock} from 'lucide-react';
 
 export default function SettingsPages(){
     const [hasChanges, setHasChanges] = useState(false);
-    const [showSaveConfrim, setShowSaveConfrim] = useState(false);
-}
+  const [showSaveConfirm, setShowSaveConfirm] = useState(false);
 
-const [userName, setUserName] = useState(false);
-const [showSaveConfirm, setShowSaveConfirm] = useState(false); 
-
-const [username, setUsername] = useState('user123');
-const [currentPassword, setCurrentPassword] = useState('');
-const [newPassword, setNewPassword] = useState('');
-const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState('user123');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
 const [preferences, setPreferences] = useState({
     favoriteCuisines: ['Italian', 'Japanese'],
@@ -61,8 +57,8 @@ const handlePreferenceChange = (field, value) =>{
     setHasChanges(true);
 };
 
-const handleUserNameChange = (values) => {
-    setUserName(true);
+const handleUsernameChange = (value) => {
+    setUsername(value);
     setHasChanges(true);
 };
 
@@ -288,67 +284,6 @@ return (
               </div>
             </div>
           </section>
-
-          {/* Notification Preferences */}
-          <section className="bg-gray-800 rounded-xl p-6 shadow-xl">
-            <h2 className="text-xl font-semibold mb-4">Notifications</h2>
-            
-            <div className="space-y-4">
-              {/* Reservation Notifications */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <label className="text-sm font-medium block">Reservation Reminders</label>
-                  <span className="text-xs text-gray-400">Get notified about upcoming reservations</span>
-                </div>
-                <button
-                  onClick={() => handleNotificationChange('reservations', !preferences.notifications.reservations)}
-                  className={`w-14 h-7 rounded-full transition-colors ${
-                    preferences.notifications.reservations ? 'bg-purple-600' : 'bg-gray-600'
-                  }`}
-                >
-                  <div className={`w-5 h-5 bg-white rounded-full transition-transform ${
-                    preferences.notifications.reservations ? 'translate-x-8' : 'translate-x-1'
-                  }`} />
-                </button>
-              </div>
-
-              {/* Promotions */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <label className="text-sm font-medium block">Promotions & Deals</label>
-                  <span className="text-xs text-gray-400">Receive special offers from restaurants</span>
-                </div>
-                <button
-                  onClick={() => handleNotificationChange('promotions', !preferences.notifications.promotions)}
-                  className={`w-14 h-7 rounded-full transition-colors ${
-                    preferences.notifications.promotions ? 'bg-purple-600' : 'bg-gray-600'
-                  }`}
-                >
-                  <div className={`w-5 h-5 bg-white rounded-full transition-transform ${
-                    preferences.notifications.promotions ? 'translate-x-8' : 'translate-x-1'
-                  }`} />
-                </button>
-              </div>
-
-              {/* Order Updates */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <label className="text-sm font-medium block">Order Updates</label>
-                  <span className="text-xs text-gray-400">Track your order status in real-time</span>
-                </div>
-                <button
-                  onClick={() => handleNotificationChange('orderUpdates', !preferences.notifications.orderUpdates)}
-                  className={`w-14 h-7 rounded-full transition-colors ${
-                    preferences.notifications.orderUpdates ? 'bg-purple-600' : 'bg-gray-600'
-                  }`}
-                >
-                  <div className={`w-5 h-5 bg-white rounded-full transition-transform ${
-                    preferences.notifications.orderUpdates ? 'translate-x-8' : 'translate-x-1'
-                  }`} />
-                </button>
-              </div>
-            </div>
-          </section>
         </div>
 
         {/* Action Buttons */}
@@ -371,3 +306,4 @@ return (
       </div>
     </div>
 );
+}
