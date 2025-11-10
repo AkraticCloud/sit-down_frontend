@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import '@material/web/all.js';
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import './RegistrationPage.css';
+import { Link } from 'react-router-dom';
 
 function RegistrationPage(){
     useEffect(() => {
@@ -73,11 +74,11 @@ function RegistrationPage(){
                 </md-chip-set>
             </section>
 
-            <div id="register-button-wrapper">
+            <Link to='/home' id="register-button-wrapper">
                 <md-filled-button id="register-button">
                     Confirm Setings
                 </md-filled-button>
-            </div>
+            </Link>
         </div>
     );
 }

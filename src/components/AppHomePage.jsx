@@ -1,7 +1,8 @@
+import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 //useState stores which restaurant is currently selected
 import '@material/web/all.js';
-import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import './AppHomePage.css';
 
 function AppHomePage() {
@@ -60,7 +61,7 @@ function AppHomePage() {
         try {
             document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
         } catch (e) {
-            console.warn("Typography unavailable, continuing without it.");
+            console.warn("Typography unavailable, continuing without it. E:" + e);
         }
     }, []);
 
@@ -117,10 +118,10 @@ function AppHomePage() {
             </div>
 
             {/* settings + favorites button */}
-            <div className="nav-buttons">
+            <Link to='/settings' className="nav-buttons">
                 <md-outlined-button>Favorites</md-outlined-button>
                 <md-outlined-button>Settings</md-outlined-button>
-            </div>
+            </Link>
 
 
         </div >

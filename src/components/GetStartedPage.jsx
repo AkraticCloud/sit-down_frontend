@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/text-button.js';
-import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import './GetStartedPage.css';
 
 function GetStartedPage() {
@@ -62,11 +63,11 @@ function GetStartedPage() {
         </div>
       </div>
       
-      <div className="get-started-button-wrapper">
-        <md-filled-button className="get-started-button">
-          Get Started
-        </md-filled-button>
-      </div>
+      <Link to='/registration' className="get-started-button-wrapper">
+          <md-filled-button className="get-started-button">
+            Get Started
+          </md-filled-button>
+      </Link>
  
       <md-text-button className="guest-button">
         Continue as Guest
