@@ -1,0 +1,100 @@
+.registration-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* padding: 2rem 1.5rem; */
+    background-color: #fef9f5;
+    font-family: 'Roboto', system-ui, sans-serif;
+    gap: 20px;
+    margin: 20px 15%;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1), 
+                0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+}
+
+.header-div{
+    text-align: center;
+}
+
+.card{
+    background-color: #ffffff;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1), 
+                0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.2s ease;
+    &:hover{
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1), 
+                    0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+    }
+    padding: 0px 15px 15px 15px;
+    width: 45%;
+    border-radius: 8px;
+}
+
+.chip-table-4{
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.chip-table-3{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+md-filter-chip{
+    width: 100%;
+    max-width: 200px;
+}
+
+md-chip-set{
+    justify-items: center;
+}
+
+#price-selector{
+    justify-content: space-between;
+}
+
+#price-selector md-filter-chip{
+    max-width: 90px;
+}
+
+#confirm-button{
+    background: linear-gradient(135deg, #ff9800 0%, #ff6b35 100%);
+}
+
+#register-button-wrapper {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
+  transition: background 0.2s ease;
+}
+
+#register-button-wrapper:hover {
+  background: linear-gradient(90deg, #fb8c00 0%, #f4511e 100%);
+}
+
+#register-button-wrapper:active,
+.get-started-button-wrapper:has(.get-started-button:active) {
+  background: linear-gradient(90deg, #f57c00 0%, #e64a19 100%);
+}
+
+#register-button {
+  width: 100%;
+  height: 56px;
+  --md-filled-button-container-color: transparent;
+  --md-filled-button-label-text-color: #ffffff;
+  --md-filled-button-container-shape: 12px;
+  --md-filled-button-hover-container-color: transparent;
+  --md-filled-button-focus-container-color: transparent;
+  --md-filled-button-pressed-container-color: transparent;
+  font-weight: 600;
+}
+
+#locator{
+    width: 100%;
+}
