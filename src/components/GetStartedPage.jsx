@@ -68,10 +68,11 @@ function GetStartedPage() {
             Get Started
           </md-filled-button>
       </Link>
- 
-      <md-text-button className="guest-button">
-        Continue as Guest
-      </md-text-button>
+      <Link to='/home' className ="guest-button-wrapper">
+        <md-text-button className="guest-button">
+          Continue as Guest
+        </md-text-button>
+      </Link>
     </div>
   );
 }
