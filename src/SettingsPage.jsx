@@ -1,5 +1,6 @@
 import React, {useState}from 'react';
 import {Save, X, LogOut, Settings, User, Lock} from 'lucide-react';
+import './SettingsPage.css';
 
 export default function SettingsPages(){
     const [hasChanges, setHasChanges] = useState(false);
@@ -13,11 +14,6 @@ export default function SettingsPages(){
 const [preferences, setPreferences] = useState({
     favoriteCuisines: ['Italian', 'Japanese'],
     dietaryRestrictions: [],
-    notifications: {
-      reservations: true,
-      promotions: true,
-      orderUpdates: true
-    },
     defaultLocation: '',
     priceRange: 'moderate',
     sortBy: 'rating'
@@ -99,96 +95,90 @@ const handleLogout = () => {
     window.location.href = '/';
 };
 
-//This is most definilaty going to change
-//I used claude to give me something to display
-//Will need to be changed to follow the stylying of the webpage and be connected to the rest of the code
 return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="settings-page">
+      <div className="settings-container">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <Settings className="w-8 h-8 text-purple-400" />
-            <h1 className="text-3xl font-bold">Settings</h1>
+        <div className="settings-header">
+          <div className="header-left">
+            <Settings className="settings-icon" />
+            <h1 className="settings-title">Settings</h1>
           </div>
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
+          <button onClick={handleLogout} className="logout-button">
+            <LogOut className="button-icon" />
             Logout
           </button>
         </div>
 
         {showSaveConfirm && (
-          <div className="mb-6 p-4 bg-green-600 rounded-lg text-center animate-pulse">
+          <div className="save-confirmation">
             Settings saved successfully! Redirecting...
           </div>
         )}
 
-        <div className="space-y-6">
+        <div className="settings-sections">
           {/* Account Settings */}
-          <section className="bg-gray-800 rounded-xl p-6 shadow-xl">
-            <div className="flex items-center gap-2 mb-4">
-              <User className="w-5 h-5 text-purple-400" />
-              <h2 className="text-xl font-semibold">Account Settings</h2>
+          <section className="settings-card">
+            <div className="card-header">
+              <User className="section-icon" />
+              <h2 className="section-title">Account Settings</h2>
             </div>
             
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Username</label>
+            <div className="card-content">
+              <div className="form-group">
+                <label className="form-label">Username</label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => handleUsernameChange(e.target.value)}
-                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="form-input"
                 />
               </div>
             </div>
           </section>
 
           {/* Password Change */}
-          <section className="bg-gray-800 rounded-xl p-6 shadow-xl">
-            <div className="flex items-center gap-2 mb-4">
-              <Lock className="w-5 h-5 text-purple-400" />
-              <h2 className="text-xl font-semibold">Change Password</h2>
+          <section className="settings-card">
+            <div className="card-header">
+              <Lock className="section-icon" />
+              <h2 className="section-title">Change Password</h2>
             </div>
             
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">Current Password</label>
+            <div className="card-content">
+              <div className="form-group">
+                <label className="form-label">Current Password</label>
                 <input
                   type="password"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
-                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="form-input"
                   placeholder="Enter current password"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">New Password</label>
+              <div className="form-group">
+                <label className="form-label">New Password</label>
                 <input
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="form-input"
                   placeholder="Enter new password"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">Confirm New Password</label>
+              <div className="form-group">
+                <label className="form-label">Confirm New Password</label>
                 <input
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="form-input"
                   placeholder="Confirm new password"
                 />
               </div>
               <button
                 onClick={handlePasswordChange}
                 disabled={!currentPassword || !newPassword || !confirmPassword}
-                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed rounded-lg transition-colors"
+                className="update-password-button"
               >
                 Update Password
               </button>
@@ -196,22 +186,22 @@ return (
           </section>
 
           {/* Restaurant Preferences */}
-          <section className="bg-gray-800 rounded-xl p-6 shadow-xl">
-            <h2 className="text-xl font-semibold mb-4">Restaurant Preferences</h2>
+          <section className="settings-card">
+            <div className="card-header">
+              <h2 className="section-title">Restaurant Preferences</h2>
+            </div>
             
-            <div className="space-y-6">
+            <div className="card-content">
               {/* Favorite Cuisines */}
-              <div>
-                <label className="block text-sm font-medium mb-3">Favorite Cuisines</label>
-                <div className="flex flex-wrap gap-2">
+              <div className="preference-group">
+                <label className="form-label">Favorite Cuisines</label>
+                <div className="button-grid">
                   {cuisines.map(cuisine => (
                     <button
                       key={cuisine}
                       onClick={() => toggleCuisine(cuisine)}
-                      className={`px-4 py-2 rounded-full transition-all ${
-                        preferences.favoriteCuisines.includes(cuisine)
-                          ? 'bg-purple-600 text-white'
-                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      className={`cuisine-button ${
+                        preferences.favoriteCuisines.includes(cuisine) ? 'active' : ''
                       }`}
                     >
                       {cuisine}
@@ -221,17 +211,15 @@ return (
               </div>
 
               {/* Dietary Restrictions */}
-              <div>
-                <label className="block text-sm font-medium mb-3">Dietary Restrictions</label>
-                <div className="flex flex-wrap gap-2">
+              <div className="preference-group">
+                <label className="form-label">Dietary Restrictions</label>
+                <div className="button-grid">
                   {dietaryOptions.map(option => (
                     <button
                       key={option}
                       onClick={() => toggleDietaryRestriction(option)}
-                      className={`px-4 py-2 rounded-full transition-all ${
-                        preferences.dietaryRestrictions.includes(option)
-                          ? 'bg-green-600 text-white'
-                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      className={`dietary-button ${
+                        preferences.dietaryRestrictions.includes(option) ? 'active' : ''
                       }`}
                     >
                       {option}
@@ -241,12 +229,12 @@ return (
               </div>
 
               {/* Price Range */}
-              <div>
-                <label className="block text-sm font-medium mb-2">Preferred Price Range</label>
+              <div className="form-group">
+                <label className="form-label">Preferred Price Range</label>
                 <select
                   value={preferences.priceRange}
                   onChange={(e) => handlePreferenceChange('priceRange', e.target.value)}
-                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="form-select"
                 >
                   <option value="budget">$ - Budget Friendly</option>
                   <option value="moderate">$$ - Moderate</option>
@@ -256,12 +244,12 @@ return (
               </div>
 
               {/* Sort Preference */}
-              <div>
-                <label className="block text-sm font-medium mb-2">Default Sort By</label>
+              <div className="form-group">
+                <label className="form-label">Default Sort By</label>
                 <select
                   value={preferences.sortBy}
                   onChange={(e) => handlePreferenceChange('sortBy', e.target.value)}
-                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="form-select"
                 >
                   <option value="rating">Highest Rated</option>
                   <option value="distance">Nearest to Me</option>
@@ -272,14 +260,14 @@ return (
               </div>
 
               {/* Default Location */}
-              <div>
-                <label className="block text-sm font-medium mb-2">Default Location</label>
+              <div className="form-group">
+                <label className="form-label">Default Location</label>
                 <input
                   type="text"
                   value={preferences.defaultLocation}
                   onChange={(e) => handlePreferenceChange('defaultLocation', e.target.value)}
                   placeholder="e.g., New York, NY or use current location"
-                  className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="form-input"
                 />
               </div>
             </div>
@@ -287,19 +275,13 @@ return (
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 mt-8 justify-end">
-          <button
-            onClick={handleDiscard}
-            className="flex items-center gap-2 px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-          >
-            <X className="w-5 h-5" />
+        <div className="action-buttons">
+          <button onClick={handleDiscard} className="discard-button">
+            <X className="button-icon" />
             Discard Changes
           </button>
-          <button
-            onClick={handleSave}
-            className="flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors"
-          >
-            <Save className="w-5 h-5" />
+          <button onClick={handleSave} className="save-button">
+            <Save className="button-icon" />
             Save Changes
           </button>
         </div>
