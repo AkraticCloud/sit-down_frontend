@@ -1,0 +1,270 @@
+/* PAGE BACKGROUND */
+.history-page {
+  min-height: 100vh;
+  background: #fef9f5;
+  font-family: 'Roboto', system-ui, sans-serif;
+  justify-content: center;
+  display: flex;
+  padding: 2.5rem 1.5rem;
+}
+
+/* MAIN WRAPPER */
+.history-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* HEADER (centered layout with floating logo) */
+.history-header {
+  position: relative;
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+/* WHITE TITLE BOX (matches registration page) */
+.history-title-box {
+  padding: 16px 32px;
+  background: white;
+  border: 2px solid #ff6b35;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.history-title-box h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.history-title-box p {
+  margin: 4px 0 0;
+  font-weight: 500;
+  color: #444;
+}
+
+/* LOGO CIRCLE (same as registration/home) */
+.history-logo-circle {
+  position: absolute;
+  top: -25px;
+  left: calc(50% - 240px); /* exact same placement as registration */
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #ff9800, #ff6b35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+
+.history-logo-icon {
+  width: 35px;
+  height: 35px;
+  fill: white;
+}
+
+
+.history-title {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #333333;
+}
+
+.history-subtitle {
+  margin: 4px 0 0;
+  color: #555;
+  font-size: 0.98rem;
+}
+
+/* FILTER CHIPS */
+.history-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+
+.history-filter-chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #ffb88c;
+  background: #fff;
+  font-size: 0.9rem;
+  color: #ff6b35;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.history-filter-chip:hover {
+  background: #fff3e6;
+}
+
+.history-filter-chip.chip-active {
+  background: linear-gradient(135deg, #ff9800, #ff6b35);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.35);
+}
+
+/* LIST */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD */
+.history-card {
+  display: flex;
+  gap: 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+  padding: 12px 14px;
+  transition: box-shadow 0.2s ease, transform 0.18s ease;
+}
+
+.history-card:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.history-image-wrapper {
+  flex-shrink: 0;
+  width: 120px;
+  height: 90px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.history-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CARD BODY */
+.history-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.history-card-header-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.history-restaurant-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.history-restaurant-info {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 0.92rem;
+}
+
+/* STATUS PILLS */
+.history-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.history-status-liked {
+  background: rgba(76, 175, 80, 0.12);
+  color: #2e7d32;
+}
+
+.history-status-favorite {
+  background: rgba(255, 193, 7, 0.12);
+  color: #ff8f00;
+}
+
+.history-status-passed {
+  background: rgba(244, 67, 54, 0.12);
+  color: #c62828;
+}
+
+/* META ROW */
+.history-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 10px;
+}
+
+.history-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* EMPTY STATE */
+.history-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #777;
+  font-size: 0.95rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .history-card {
+    flex-direction: column;
+  }
+
+  .history-image-wrapper {
+    width: 100%;
+    height: 180px;
+  }
+
+  .history-card-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* FOOTER BAR — Same style as app home page */
+.history-footer {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+
+    background: white;
+    padding: 14px 18px;
+    border-radius: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.history-footer a {
+  text-decoration: none;
+}

@@ -8,6 +8,7 @@ import GetStartedPage from './components/GetStartedPage';
 import RegistrationPage from './components/RegistrationPage'
 import HomePage from './components/AppHomePage'
 import SettingsPage from './components/SettingsPage'
+import HistoryPage from './components/HistoryPage';
 
 function App() {
   // return <GetStartedPage />;
@@ -18,6 +19,7 @@ function App() {
         <Route path='/registration' element={<RegistrationPage />}/>
         <Route path='/home' element={<HomePage />}/>
         <Route path='/settings' element={<SettingsPage />}/>
+        <Route path="/history" element={<HistoryPage />} />
       </Routes>
     </BrowserRouter>
   )
