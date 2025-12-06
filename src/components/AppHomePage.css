@@ -5,7 +5,6 @@
     width: 100%;
 }
 
-
 .app-home-page {
     display: flex;
     flex-direction: column;
@@ -16,7 +15,6 @@
     background: #fef9f5;
     padding-top: 2rem;
 }
-
 
 .home-header {
     position: relative;
@@ -59,6 +57,9 @@
     fill: white;
 }
 
+.location-input {
+    margin-top: 8px;
+}
 
 md-outlined-text-field {
     --md-outlined-text-field-outline-color: #ff6b35;
@@ -82,6 +83,7 @@ md-outlined-text-field {
     transform: scale(1.02);
 }
 
+/* Swipe animations */
 
 .restaurant-card.swipe-left {
     transform: translateX(-350px) rotate(-10deg);
@@ -149,7 +151,6 @@ md-outlined-text-field {
     margin-bottom: 12px;
 }
 
-
 .buttons {
     margin-top: 8px;
     display: flex;
@@ -157,6 +158,9 @@ md-outlined-text-field {
     gap: 5px;
 }
 
+.action-button-wrapper {
+    display: flex;
+}
 
 md-filled-button {
     --md-sys-color-primary: #ff6b35;
@@ -164,6 +168,14 @@ md-filled-button {
     --md-sys-color-on-primary: #ffffff;
 }
 
+/* Buddy mode */
+
+.buddy-mode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
 
 .buddy-gradient {
     --md-filled-button-container-color: transparent !important;
@@ -182,7 +194,6 @@ md-filled-button {
     box-shadow: 0 6px 14px rgba(255, 107, 53, 0.45);
 }
 
-
 .footer-bar {
     display: flex;
     gap: 16px;
@@ -190,4 +201,133 @@ md-filled-button {
     padding: 14px 18px;
     border-radius: 40px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.wheel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+.wheel-container {
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    width: 420px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.wheel-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.wheel-sub {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-top: 26px solid #ff6b35;
+    z-index: 30;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.wheel-wrapper {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 8px solid #333333;
+    margin: 0 auto 24px auto;
+    overflow: hidden;
+    transition: transform 6s cubic-bezier(.08, .72, .13, 1);
+}
+
+.wheel-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.wheel-slice {
+    stroke: none;
+}
+
+.wheel-label {
+    fill: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+.spin-button {
+    margin-bottom: 12px !important;
+    font-size: 1.1rem !important;
+    padding: 14px 32px !important;
+}
+
+.wheel-button-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.wheel-button-row md-filled-button,
+.wheel-button-row md-text-button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.result-button-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.result-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+md-text-button.cancel-btn {
+    --md-sys-color-primary: #ff5252 !important;
+    --md-text-button-label-text-color: #ff5252 !important;
+    --md-text-button-focus-label-text-color: #ff5252 !important;
+    --md-text-button-hover-label-text-color: #ff5252 !important;
+    --md-text-button-pressed-label-text-color: #ff5252 !important;
+    --md-text-button-disabled-label-text-color: #ffb3b3 !important;
+
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+md-text-button.cancel-btn:hover {
+    background: rgba(255, 82, 82, 0.12) !important;
+}
+
+md-text-button.cancel-btn:active {
+    background: rgba(255, 82, 82, 0.2) !important;
 }
