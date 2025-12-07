@@ -1,86 +1,113 @@
-import { useEffect } from 'react';
-import '@material/web/all.js';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '@material/web/button/filled-button.js';
+import '@material/web/textfield/filled-text-field.js';
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import './RegistrationPage.css';
-import { Link } from 'react-router-dom';
 
-function RegistrationPage(){
-    useEffect(() => {
-        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
-    }, []);
+function RegistrationPage() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    return (
-        <div className='registration-page'>
-            {/* Imports the google api outlined symbols library. This import should be moved to the top level. */}
-            <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"></link>
+  useEffect(() => {
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  }, []);
 
-            <div className='header-div'>
-                <h1>What Are Your Tastes?</h1>
-                <h3>Help Us Find Your Perfect Place</h3>
-            </div>
+  async function createUser({ email, password, username }) {
+  console.log("➡️ Sending signup request to backend...");
 
-            <section className='card'>
-                <p>Where Are You Located?</p>
-                <md-outlined-text-field placeholder="Enter Your Location" id='locator'>
-                    <md-icon slot="leading-icon">location_on</md-icon>
-                </md-outlined-text-field>
-            </section>
+  let res;
+  try {
+    res = await fetch('https://sit-down-backend.vercel.app/user/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email, password, username })
+    });
+  } catch (networkErr) {
+    console.error("Network error (backend not reachable):", networkErr);
+    throw new Error("Cannot reach backend");
+  }
 
-            <section className='card'>
-                <p>What Cuisines Do You Prefer?</p>
-                <md-chip-set className='chip-table-4'>
-                    <md-filter-chip label='American'></md-filter-chip>
-                    <md-filter-chip label='Indian'></md-filter-chip>
-                    <md-filter-chip label='Mexican'></md-filter-chip>
-                    <md-filter-chip label='Italian'></md-filter-chip>
-                    <md-filter-chip label='Japanese'></md-filter-chip>
-                    <md-filter-chip label='Chinese'></md-filter-chip>
-                    <md-filter-chip label='Thai'></md-filter-chip>
-                    <md-filter-chip label='Mediterranean'></md-filter-chip>
-                </md-chip-set>
-            </section>
-            
-            <section className='card'>
-                <p>What Are Your Dietary Restrictions?</p>
-                <md-chip-set className='chip-table-3'>
-                    <md-filter-chip label='Gluten-free'></md-filter-chip>
-                    <md-filter-chip label='Vegetarian'></md-filter-chip>
-                    <md-filter-chip label='Vegan'></md-filter-chip>
-                    <md-filter-chip label='Kosher'></md-filter-chip>
-                    <md-filter-chip label='Halal'></md-filter-chip>
-                    <md-filter-chip label='Nut Allergy'></md-filter-chip>
-                </md-chip-set>
-            </section>
-            
-            <section className='card'>
-                <p>What Are Your Dining Preferences?</p>
-                <md-chip-set className='chip-table-3'>
-                    <md-filter-chip label='Drive-thru'></md-filter-chip>
-                    <md-filter-chip label='Dine-in'></md-filter-chip>
-                    <md-filter-chip label='Counter Service'></md-filter-chip>
-                    <md-filter-chip label='Outdoor Seating'></md-filter-chip>
-                    <md-filter-chip label='Takeout'></md-filter-chip>
-                    <md-filter-chip label='Family Friendly'></md-filter-chip>
-                </md-chip-set>
-            </section>
+  console.log("⬅️ Backend responded. Status:", res.status);
 
-            <section className='card'>
-                <p>What Is Your Price Range?</p>
-                <md-chip-set id='price-selector'>
-                    <md-filter-chip label='$'></md-filter-chip>
-                    <md-filter-chip label='$$'></md-filter-chip>
-                    <md-filter-chip label='$$$'></md-filter-chip>
-                    <md-filter-chip label='$$$$'></md-filter-chip>
-                </md-chip-set>
-            </section>
+  const text = await res.text();
+  console.log("Raw response text from backend:", text);
 
-            <Link to='/home' id="register-button-wrapper">
-                <md-filled-button id="register-button">
-                    Confirm Setings
-                </md-filled-button>
-            </Link>
-        </div>
-    );
+  if (!res.ok) {
+    throw new Error(text || `Signup failed (${res.status})`);
+  }
+
+  console.log("Parsing JSON...");
+  return JSON.parse(text);
 }
 
-export default RegistrationPage
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      await createUser({ email, password, username });
+      navigate('/login'); 
+    } catch (err) {
+      setError(err.message || 'Signup error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="registration-page">
+      <h1 className="md-typescale-display-medium main-title">Create an Account</h1>
+
+      <p className="md-typescale-body-large tagline">
+        Join Sit Down to discover new dining spots!
+      </p>
+
+      <form className="registration-form" onSubmit={handleSubmit}>
+        
+        <md-filled-text-field
+          label="Username"
+          type="text"
+          class="registration-input"
+          required
+          value={username}
+          onInput={(e) => setUsername(e.target.value)}
+        />
+
+        <md-filled-text-field
+          label="Email"
+          type="email"
+          class="registration-input"
+          required
+          value={email}
+          onInput={(e) => setEmail(e.target.value)}
+        />
+
+        <md-filled-text-field
+          label="Password"
+          type="password"
+          class="registration-input"
+          required
+          value={password}
+          onInput={(e) => setPassword(e.target.value)}
+        />
+
+        <div className="registration-button-wrapper">
+          <md-filled-button class="registration-button" disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </md-filled-button>
+        </div>
+
+        {error && <div className="registration-error">{error}</div>}
+      </form>
+    </div>
+  );
+}
+
+export default RegistrationPage;
