@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import "./FavoritesPage.css"
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import '@material/web/divider/divider.js';
@@ -8,7 +8,9 @@ function FavoritesPage(){
     const [currentListData, setCurrentListData] = useState(null)
     const [foodListData, setFoodListData] = useState(null)
     const tempUname = "test101x9"
-    const toyListArr = [{"foodlist-name": "1"}, {"foodlist-name": "2"}, {"foodlist-name": "3"}]
+    const toyListArr = useMemo(() => {
+        return([{"foodlist-name": "1"}, {"foodlist-name": "2"}, {"foodlist-name": "3"}])
+    }, [])
 
     useEffect(() => {
         document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
@@ -40,7 +42,7 @@ function FavoritesPage(){
         createList(toyListArr[0]["foodlist-name"], "test", tempUname)
         createList(toyListArr[1]["foodlist-name"], "test", tempUname)
         createList(toyListArr[2]["foodlist-name"], "test", tempUname)
-    })
+    }, [toyListArr])
 
     //Potentially refactor to remove the function assignments, just execute the code in the useEffect
     useEffect(() => { //Grabs the foodlists the user has made. 
