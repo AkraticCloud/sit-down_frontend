@@ -35,6 +35,7 @@ function LoginPage() {
         window.location.href = '/survey' //to be changed to questionnaire
       }
     } catch (err) {
+      console.log(err)
       setError('Network error')
     } finally {
       setLoading(false)
