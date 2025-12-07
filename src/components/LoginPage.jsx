@@ -32,7 +32,7 @@ function LoginPage() {
         const text = await res.text().catch(() => null)
         setError(text || 'Login failed')
       } else {
-        window.location.href = '/Questionnaire'
+        window.location.href = '/RegistrationPage' //to be changed to questionnaire
       }
     } catch (err) {
       setError('Network error')
