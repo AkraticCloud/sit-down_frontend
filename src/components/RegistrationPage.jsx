@@ -5,6 +5,7 @@ import '@material/web/textfield/filled-text-field.js';
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import './RegistrationPage.css';
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 
 function RegistrationPage() {
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ function RegistrationPage() {
 
   return (
     <div className="registration-page">
+      <Logo />
       <h1 className="md-typescale-display-medium main-title">Create an Account</h1>
 
       <p className="md-typescale-body-large tagline">
@@ -107,7 +109,7 @@ function RegistrationPage() {
 
         {error && <div className="registration-error">{error}</div>}
       </form>
-      <p>
+      <p className='login-redirect'>
         Already have an account? <Link to='/login'>Login</Link>
       </p>
     </div>

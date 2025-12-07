@@ -94,28 +94,19 @@ body, html, #root {
   font-size: 19px;
 }
 
-.guest-button {
-  --md-text-button-label-text-color: #333333;
-  --md-text-button-label-text-size: 16px;
+.login-redirect {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.login-redirect a {
+  color: #0059ff;
+  text-decoration: none;
   font-weight: 500;
 }
 
-.guest-button:hover {
-  --md-text-button-hover-label-text-color: #666666;
-}
-
-@media (max-width: 1000px) {
-  .login-page {
-    padding: 1.5rem 1rem;
-  }
-
-  .logo-circle {
-    width: 70px;
-    height: 70px;
-  }
-
-  .logo-icon {
-    width: 35px;
-    height: 35px;
-  }
+.login-redirect a:hover {
+  text-decoration: underline;
 }
