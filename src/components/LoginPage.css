@@ -104,45 +104,40 @@ body, html, #root {
   --md-text-button-hover-label-text-color: #666666;
 }
 
-@media (max-width: 1000px) {
-  .login-page {
-    padding: 1.5rem 1rem;
-  }
-
-  .logo-circle {
-    width: 70px;
-    height: 70px;
-  }
-
-  .logo-icon {
-    width: 35px;
-    height: 35px;
-  }
-}
-
 .tagline{
   white-space: nowrap;
 }
 
-.signup-redirect {
+.register-redirect {
   margin-top: 1rem;
   text-align: center;
   font-size: 0.95rem;
   color: #666;
 }
 
-.signup-redirect a {
+.register-redirect a {
   color: #0059ff;
   text-decoration: none;
   font-weight: 500;
 }
 
-.signup-redirect a:hover {
+.register-redirect a:hover {
   text-decoration: underline;
 }
 
 .guest-option{
-  padding-top: 7px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.guest-option a{
+  color: #0059ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.guest-option a:hover{
+  text-decoration: underline;
 }
 
 
