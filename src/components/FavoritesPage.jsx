@@ -11,7 +11,7 @@ function FavoritesPage(){
     const toyListArr = [{"foodlist-name": "1"}, {"foodlist-name": "2"}, {"foodlist-name": "3"}]
 
     //Potentially refactor to remove the function assignments, just execute the code in the useEffect
-    useEffect(() => {
+    useEffect(() => { //Grabs the foodlists the user has made. 
         const fetchLists = async () => {
             setLoading(true)
             try{
@@ -35,7 +35,7 @@ function FavoritesPage(){
         fetchLists()
     }, []);
 
-    useEffect(() =>{
+    useEffect(() =>{ //Grabs the contents of the current foodlist. 
         const fetchRestaurants = async () => {
             setLoading(true)
             if(currentList != null){
@@ -59,8 +59,9 @@ function FavoritesPage(){
         }
 
         fetchRestaurants()
-    }, [currentList]);
+    }, [currentList]); //Retriggers this effect when the current list changes. 
 
+    //TODO: Change the display based on if the data is loading or has errored out. 
     return(
         <div className="favorites-page">
             <section className="foodlist-list-container">
