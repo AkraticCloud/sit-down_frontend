@@ -8,15 +8,16 @@ import GetStartedPage from './components/GetStartedPage';
 import SurveyPage from './components/SurveyPage'
 import HomePage from './components/AppHomePage'
 import SettingsPage from './components/SettingsPage'
+import LoginPage from './components/LoginPage'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<GetStartedPage />}/>
+        <Route path="/login" element={<LoginPage/>}/>
         <Route path='/survey' element={<SurveyPage />}/>
         <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/questionnaire' element={<QuestionnairePage/>}/>
         <Route path='/home' element={<HomePage />}/>
         <Route path='/settings' element={<SettingsPage />}/>
       </Routes>
