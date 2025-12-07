@@ -9,6 +9,7 @@ import SurveyPage from './components/SurveyPage'
 import HomePage from './components/AppHomePage'
 import SettingsPage from './components/SettingsPage'
 import LoginPage from './components/LoginPage'
+import FavoritesPage from './components/FavoritesPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/home' element={<HomePage />}/>
         <Route path='/settings' element={<SettingsPage />}/>
+        <Route path='/favorites' element={<FavoritesPage/>}/>
       </Routes>
     </BrowserRouter>
   )

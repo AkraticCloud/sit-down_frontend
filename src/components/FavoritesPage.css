@@ -1,0 +1,8 @@
+.favorites-page{
+    display: grid;
+    grid-template-columns: 1fr, 1fr;
+    height: 90%;
+    width: 90%;
+    align-items: center;
+    background: #fef9f5;
+}
