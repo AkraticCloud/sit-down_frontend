@@ -20,7 +20,6 @@ function App() {
         <Route path='/questionnaire' element={<QuestionnairePage/>}/>
         <Route path='/home' element={<HomePage />}/>
         <Route path='/settings' element={<SettingsPage />}/>
-        
       </Routes>
     </BrowserRouter>
   )
