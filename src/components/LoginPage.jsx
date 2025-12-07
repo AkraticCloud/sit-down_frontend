@@ -25,7 +25,7 @@ function LoginPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // cookies
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email: email, password: password })
       })
 
       if (!res.ok) {
