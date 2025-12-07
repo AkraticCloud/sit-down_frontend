@@ -91,6 +91,7 @@ body, html, #root {
   --md-filled-button-label-text-color: #ffffff;
   --md-filled-button-container-shape: 12px;
   font-weight: 600;
+  font-size: 19px;
 }
 
 .guest-button {

@@ -60,7 +60,7 @@ function LoginPage() {
       <h1 className="md-typescale-display-medium main-title">Sit Down</h1>
 
       <p className="md-typescale-body-large tagline">
-        Log in to continue discovering new dining spots
+        Log in to continue discovering new dining spots!
       </p>
 
       <form className="login-form" onSubmit={handleSubmit}>
@@ -87,6 +87,11 @@ function LoginPage() {
         </div>
         {error && <div className="login-error">{error}</div>}
       </form>
+
+      <div className="guest-option">
+        <Link to="/home">Continue as Guest</Link> 
+      </div>
+
       <p classname ="signup-redirect">
         Don't have an account? <Link to='/register'>Register</Link>
       </p>
