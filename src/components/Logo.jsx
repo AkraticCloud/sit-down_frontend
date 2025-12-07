@@ -1,5 +1,5 @@
 
-function Logo(){
+function Logo({ className = '' }){
     return (
         <div className={`logo-container ${className}`}>
             <div className="logo-circle">
