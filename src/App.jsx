@@ -8,6 +8,7 @@ import GetStartedPage from './components/GetStartedPage';
 import RegistrationPage from './components/RegistrationPage'
 import HomePage from './components/AppHomePage'
 import SettingsPage from './components/SettingsPage'
+import LoginPage from './components/LoginPage'
 
 function App() {
   // return <GetStartedPage />;
@@ -15,6 +16,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<GetStartedPage />}/>
+        <Route path="/login" element={<LoginPage/>}/>
+        {/*<Route path='/questionnaire' element={<QuestionnairePage/>}/> add later*/} 
         <Route path='/registration' element={<RegistrationPage />}/>
         <Route path='/home' element={<HomePage />}/>
         <Route path='/settings' element={<SettingsPage />}/>
