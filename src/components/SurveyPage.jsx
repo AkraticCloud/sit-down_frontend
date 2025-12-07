@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import '@material/web/all.js';
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
-import './RegistrationPage.css';
+import './SurveyPage.css';
 import { Link } from 'react-router-dom';
 
-function RegistrationPage(){
+function SurveyPage(){
     useEffect(() => {
         document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
     }, []);
 
     return (
-        <div className='registration-page'>
+        <div className='survey-page'>
             {/* Imports the google api outlined symbols library. This import should be moved to the top level. */}
             <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"></link>
 
@@ -83,4 +83,4 @@ function RegistrationPage(){
     );
 }
 
-export default RegistrationPage
+export default SurveyPage

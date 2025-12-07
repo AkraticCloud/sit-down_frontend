@@ -5,17 +5,16 @@ import '@material/web/textfield/outlined-text-field.js';
 import '@material/web/checkbox/checkbox.js';
 import './App.css';
 import GetStartedPage from './components/GetStartedPage';
-import RegistrationPage from './components/RegistrationPage'
+import SurveyPage from './components/SurveyPage'
 import HomePage from './components/AppHomePage'
 import SettingsPage from './components/SettingsPage'
 
 function App() {
-  // return <GetStartedPage />;
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<GetStartedPage />}/>
-        <Route path='/registration' element={<RegistrationPage />}/>
+        <Route path='/survey' element={<SurveyPage />}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/questionnaire' element={<QuestionnairePage/>}/>
         <Route path='/home' element={<HomePage />}/>
