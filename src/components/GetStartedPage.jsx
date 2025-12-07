@@ -63,7 +63,7 @@ function GetStartedPage() {
         </div>
       </div>
       
-      <Link to='/survey' className="get-started-button-wrapper">
+      <Link to='/login' className="get-started-button-wrapper">
           <md-filled-button className="get-started-button">
             Get Started
           </md-filled-button>
