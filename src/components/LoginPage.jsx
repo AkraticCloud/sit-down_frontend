@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState} from 'react';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/text-button.js';
 import '@material/web/textfield/filled-text-field.js';
@@ -6,9 +6,40 @@ import { styles as typescaleStyles } from '@material/web/typography/md-typescale
 import './LoginPage.css';
 
 function LoginPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
   }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+  try {
+      const res = await fetch('https://sit-down-backend.vercel.app/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // cookies
+        body: JSON.stringify({ email, password })
+      })
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => null)
+        setError(text || 'Login failed')
+      } else {
+        window.location.href = '/Questionnaire'
+      }
+    } catch (err) {
+      setError('Network error')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="login-page">
@@ -22,38 +53,36 @@ function LoginPage() {
             />
           </svg>
         </div>
-      </div>
-
+    </div>
       <h1 className="md-typescale-display-medium main-title">Sit Down</h1>
 
       <p className="md-typescale-body-large tagline">
         Log in to continue discovering new dining spots
       </p>
 
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <md-filled-text-field
           label="Email"
           type="email"
           class="login-input"
           required
-        ></md-filled-text-field>
-
+          value={email}
+          onInput={e => setEmail(e.target.value)}
+        />
         <md-filled-text-field
           label="Password"
           type="password"
           class="login-input"
           required
-        ></md-filled-text-field>
-
+          value={password}
+          onInput={e => setPassword(e.target.value)}
+        />
         <div className="login-button-wrapper">
-          <md-filled-button class="login-button">
-            Login
+          <md-filled-button class="login-button" disabled={loading} >
+            {loading ? 'Logging in...' : 'Login'}
           </md-filled-button>
         </div>
-
-        <md-text-button class="guest-button">
-          Continue as Guest
-        </md-text-button>
+        {error && <div className="login-error">{error}</div>}
       </form>
     </div>
   );
