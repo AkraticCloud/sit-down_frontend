@@ -38,6 +38,7 @@ function LoginPage() {
         navigate('/survey')
       }
     } catch (err) {
+      console.log(err)
       setError('Network error')
     } finally {
       setLoading(false)
