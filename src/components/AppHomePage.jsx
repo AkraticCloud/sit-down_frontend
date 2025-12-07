@@ -118,10 +118,15 @@ function AppHomePage() {
             </div>
 
             {/* settings + favorites button */}
-            <Link to='/settings' className="nav-buttons">
-                <md-outlined-button>Favorites</md-outlined-button>
-                <md-outlined-button>Settings</md-outlined-button>
-            </Link>
+            <section className='nav-button-container'>
+                    <Link to='/settings' className="nav-buttons">
+                        <md-outlined-button>Settings</md-outlined-button>
+                    </Link>
+
+                    <Link to='/favorites' className="nav-buttons">
+                        <md-outlined-button>Favorites</md-outlined-button>
+                    </Link>
+            </section>
 
 
         </div >

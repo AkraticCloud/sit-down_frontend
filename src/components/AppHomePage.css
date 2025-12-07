@@ -104,13 +104,18 @@
     margin-top: 12px;
 }
 
+.nav-button-container{
+    display: flex;
+    flex-direction: row;
+    min-width: 270px;
+    justify-content: space-evenly;
+}
+
 .nav-buttons {
     margin-top: 16px;
     display: flex;
-    gap: 13px;
     justify-content: center;
 }
-
 
 .buttons {
     margin-top: 12px;
