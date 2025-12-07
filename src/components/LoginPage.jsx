@@ -1,11 +1,14 @@
 import { useEffect, useState} from 'react';
+import { useNavigate } from 'react-router';
 import '@material/web/button/filled-button.js';
 import '@material/web/button/text-button.js';
 import '@material/web/textfield/filled-text-field.js';
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import './LoginPage.css';
+import { Link } from 'react-router-dom';
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
@@ -32,7 +35,7 @@ function LoginPage() {
         const text = await res.text().catch(() => null)
         setError(text || 'Login failed')
       } else {
-        window.location.href = '/survey' //to be changed to questionnaire
+        navigate('/survey')
       }
     } catch (err) {
       setError('Network error')
@@ -84,6 +87,9 @@ function LoginPage() {
         </div>
         {error && <div className="login-error">{error}</div>}
       </form>
+      <p classname ="signup-redirect">
+        Don't have an account? <Link to='/register'>Register</Link>
+      </p>
     </div>
   );
 }

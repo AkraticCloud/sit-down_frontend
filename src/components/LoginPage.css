@@ -118,3 +118,21 @@ body, html, #root {
     height: 35px;
   }
 }
+
+.signup-redirect {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.signup-redirect a {
+  color: #0059ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.signup-redirect a:hover {
+  text-decoration: underline;
+}
+

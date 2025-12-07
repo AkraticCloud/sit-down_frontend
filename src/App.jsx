@@ -10,12 +10,14 @@ import HomePage from './components/AppHomePage'
 import SettingsPage from './components/SettingsPage'
 import LoginPage from './components/LoginPage'
 import FavoritesPage from './components/FavoritesPage';
+import RegistrationPage from './components/RegistrationPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<GetStartedPage />}/>
+        <Route path='/register' element={<RegistrationPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path='/survey' element={<SurveyPage />}/>
         <Route path='/home' element={<HomePage />}/>
