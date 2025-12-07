@@ -1,0 +1,120 @@
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.registration-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background-color: #fef9f5;
+  font-family: 'Roboto', system-ui, sans-serif;
+}
+
+.logo-container {
+  margin-bottom: 1.5rem;
+}
+
+.logo-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff9800 0%, #ff6b35 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.main-title {
+  color: #333333;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tagline {
+  color: #666666;
+  margin: 0 0 2.5rem 0;
+  text-align: center;
+  font-weight: 400;
+  max-width: 320px;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.registration-input {
+  width: 100%;
+  --md-filled-text-field-container-color: #ffffff;
+  --md-filled-text-field-focus-outline-color: #ff9800;
+  --md-filled-text-field-input-text-color: #333333;
+}
+
+.registration-button-wrapper {
+  width: 100%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
+  transition: background 0.2s ease;
+}
+
+.registration-button-wrapper:hover {
+  background: linear-gradient(90deg, #fb8c00 0%, #f4511e 100%);
+}
+
+.registration-button-wrapper:active,
+.registration-button-wrapper:has(.login-button:active) {
+  background: linear-gradient(90deg, #f57c00 0%, #e64a19 100%);
+}
+
+.registration-button {
+  width: 100%;
+  height: 56px;
+  --md-filled-button-container-color: transparent;
+  --md-filled-button-label-text-color: #ffffff;
+  --md-filled-button-container-shape: 12px;
+  font-weight: 600;
+}
+
+.guest-button {
+  --md-text-button-label-text-color: #333333;
+  --md-text-button-label-text-size: 16px;
+  font-weight: 500;
+}
+
+.guest-button:hover {
+  --md-text-button-hover-label-text-color: #666666;
+}
+
+@media (max-width: 1000px) {
+  .login-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .logo-circle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logo-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
