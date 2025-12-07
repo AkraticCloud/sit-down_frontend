@@ -19,7 +19,7 @@ function FavoritesPage(){
     useEffect(() =>{
         const createList = async (foodlist_name, restaurant_id, username) => {
             try{
-                const response = await fetch(`https://sit-down-backend.vercel.app/db/createlist`, {
+                const response = await fetch(`https://sit-down-backend.vercel.app/action/createlist`, {
                     method: "POST",
                     body: JSON.stringify({
                         foodlist_name: foodlist_name,
@@ -48,7 +48,7 @@ function FavoritesPage(){
     useEffect(() => { //Grabs the foodlists the user has made. 
         const fetchLists = async () => {
             try{
-                const response = await fetch(`https://sit-down-backend.vercel.app/db/foodlists/:${tempUname}`)
+                const response = await fetch(`https://sit-down-backend.vercel.app/action/foodlists/:${tempUname}`)
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -70,7 +70,7 @@ function FavoritesPage(){
         const fetchRestaurants = async () => {
             if(currentList != null){
                 try{
-                    const response = await fetch(`https://sit-down-backend.vercel.app/db/foodlists/:${tempUname}/:${currentList}`)
+                    const response = await fetch(`https://sit-down-backend.vercel.app/action/foodlists/:${tempUname}/:${currentList}`)
 
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
