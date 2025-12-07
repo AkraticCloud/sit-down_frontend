@@ -4,6 +4,7 @@ import '@material/web/button/filled-button.js';
 import '@material/web/textfield/filled-text-field.js';
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import './RegistrationPage.css';
+import { Link } from 'react-router-dom';
 
 function RegistrationPage() {
   const navigate = useNavigate();
@@ -106,6 +107,9 @@ function RegistrationPage() {
 
         {error && <div className="registration-error">{error}</div>}
       </form>
+      <p>
+        Already have an account? <Link to='/login'>Login</Link>
+      </p>
     </div>
   );
 }
