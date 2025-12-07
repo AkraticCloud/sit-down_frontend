@@ -1,19 +1,50 @@
 import { useEffect, useState } from "react"
 import "./FavoritesPage.css"
+import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+import '@material/web/divider/divider.js';
 
 function FavoritesPage(){
     const [currentList, setCurrentList] = useState(0)
     const [currentListData, setCurrentListData] = useState(null)
     const [foodListData, setFoodListData] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [isError, setError] = useState(false)
-    const tempUname = "test"
+    const tempUname = "test101x9"
     const toyListArr = [{"foodlist-name": "1"}, {"foodlist-name": "2"}, {"foodlist-name": "3"}]
+
+    useEffect(() => {
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    }, []);
+
+    useEffect(() =>{
+        const createList = async (foodlist_name, restaurant_id, username) => {
+            try{
+                const response = await fetch(`https://sit-down-backend.vercel.app/db/createlist`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        foodlist_name: foodlist_name,
+                        restaurant_id: restaurant_id,
+                        username: username
+                    })
+                })
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json()
+                console.log("Data returned:" + data)
+            }catch (e){
+                console.log(e)
+            }
+        }
+
+        createList(toyListArr[0]["foodlist-name"], "test", tempUname)
+        createList(toyListArr[1]["foodlist-name"], "test", tempUname)
+        createList(toyListArr[2]["foodlist-name"], "test", tempUname)
+    })
 
     //Potentially refactor to remove the function assignments, just execute the code in the useEffect
     useEffect(() => { //Grabs the foodlists the user has made. 
         const fetchLists = async () => {
-            setLoading(true)
             try{
                 const response = await fetch(`https://sit-down-backend.vercel.app/db/foodlists/:${tempUname}`)
 
@@ -24,11 +55,9 @@ function FavoritesPage(){
                 const data = await response.json()
 
                 setFoodListData(data)
+                console.log("Data returned:" + data)
             }catch (e){
                 console.log(e)
-                setError(true)
-            }finally{
-                setLoading(false)
             }
         }
 
@@ -37,7 +66,6 @@ function FavoritesPage(){
 
     useEffect(() =>{ //Grabs the contents of the current foodlist. 
         const fetchRestaurants = async () => {
-            setLoading(true)
             if(currentList != null){
                 try{
                     const response = await fetch(`https://sit-down-backend.vercel.app/db/foodlists/:${tempUname}/:${currentList}`)
@@ -49,11 +77,9 @@ function FavoritesPage(){
                     const data = await response.json()
 
                     setCurrentListData(data)
+                    console.log("Data returned:" + data)
                 }catch (e){
                     console.log(e)
-                    setError(true)
-                }finally{
-                    setLoading(false)
                 }
             }
         }
@@ -61,7 +87,6 @@ function FavoritesPage(){
         fetchRestaurants()
     }, [currentList]); //Retriggers this effect when the current list changes. 
 
-    //TODO: Change the display based on if the data is loading or has errored out. 
     return(
         <div className="favorites-page">
             <section className="foodlist-list-container">
@@ -81,7 +106,8 @@ function FavoritesPage(){
                 ))}
             </section>
             <section className="current-foodlist-container">
-                <h1>The current list is: {currentList}</h1>
+                <h1>{currentList}</h1>
+                <md-divider></md-divider>
             </section>
         </div>
     )
