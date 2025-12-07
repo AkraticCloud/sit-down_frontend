@@ -18,7 +18,6 @@ function App() {
         <Route path='/' element={<GetStartedPage />}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path='/survey' element={<SurveyPage />}/>
-        <Route path='/login' element={<LoginPage/>}/>
         <Route path='/home' element={<HomePage />}/>
         <Route path='/settings' element={<SettingsPage />}/>
         <Route path='/favorites' element={<FavoritesPage/>}/>
