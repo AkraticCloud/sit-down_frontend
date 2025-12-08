@@ -66,11 +66,13 @@ function AppHomePage() {
 
     const storeHistory = (status) => {
         let meridian = (date.getHours() < 12) ? "AM" : "PM"
-        let newEntry = restaurants[index]
-        console.log(localStorage.getItem("history"))
+        
+        // Create a copy of the restaurant object instead of mutating it
+        let newEntry = { ...restaurants[index] }  // ← Add spread operator
+        
         let history = JSON.parse(localStorage.getItem("history")) || []
         newEntry.status = status
-        newEntry.time = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} • ${date.getHours() % 12}:${date.getMinutes()} ${meridian}`
+        newEntry.time = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} • ${date.getHours() % 12 || 12}:${String(date.getMinutes()).padStart(2, '0')} ${meridian}`
         newEntry.location = "Towson, MD"
 
         history.push(newEntry)
