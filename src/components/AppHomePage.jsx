@@ -189,8 +189,14 @@ function AppHomePage() {
             {/* Location Input*/}
             <LocationButton onResults={(data) => {
                 if(data.length > 0){
-                    setRestaurants(data);
-                    setIndex(o);
+                    const formatted = data.map(place => ({
+                        name: place.name,
+                        info: place.primaryType || "Restaurant",  // temporary until you add more details
+                        image: "https://picsum.photos/800/500?random=" + Math.random(), // placeholder until photo fetch
+                        placeid: place.placeid  // keep for later photo/details fetch
+                    }));
+                    setRestaurants(formatted);
+                    setIndex(0);
                 }
             }}/>
             
