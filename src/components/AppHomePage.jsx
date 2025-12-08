@@ -6,6 +6,7 @@ import RestaurantCard from './RestaurantCard';
 import '@material/web/all.js';
 import './AppHomePage.css';
 import LocationButton from './LocationButton';
+import RecommendationModal from './RecommendationModal';
 
 function AppHomePage() {
     //placeholder restaurants which are replaced when "Use My Location" button is clicked
@@ -39,6 +40,11 @@ function AppHomePage() {
     
     //Stores the current data and time for history tracking
     const[date, setDate] = useState(new Date());
+
+    const [recommendation, setRecommendation] = useState(null);
+    const [loadingRec, setLoadingRec] = useState(false);
+
+
     useEffect(() => {
         const interval = setInterval(() => {
           setDate(new Date())
@@ -89,6 +95,29 @@ function AppHomePage() {
             console.warn('Typography unavailable, continuing without it. E:' + e);
         }
     }, []);
+
+    const getAIRecommendation = async () => {
+        setLoadingRec(true);
+        const history = JSON.parse(localStorage.getItem("history")) || [];
+        const userPreferences = JSON.parse(localStorage.getItem("preferences")) || {};
+        console.log(userPreferences)
+        
+        try {
+            const res = await fetch("https://sit-down-backend.vercel.app/ai/recommend", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ history, preferences: userPreferences })
+            });
+            
+            
+            const data = await res.json();
+            setRecommendation(data);
+        } catch (err) {
+            console.error("Recommendation fetch failed:", err);
+        } finally {
+            setLoadingRec(false);
+        }
+    };
 
     return (
         <div className="app-home-page">
@@ -150,10 +179,17 @@ function AppHomePage() {
                 }}
             />
 
+
             {/* buddy mode button*/}
             <div className="buddy-mode">
                 <h3>Buddy Mode</h3>
                 <md-filled-button className="buddy-gradient">Enable Buddy Mode</md-filled-button>
+            </div>
+            
+            <div className="ai-mode">
+                <md-filled-button className="ai-gradient" onClick={getAIRecommendation} disabled={loadingRec}>
+                    {loadingRec ? "Loading..." : "Get AI Recommendation 🤖"}
+                </md-filled-button>
             </div>
 
             {/* settings + favorites button */}
@@ -179,6 +215,13 @@ function AppHomePage() {
                     onSelectRestaurant={(index) => setIndex(index)}
                 />
             )}
+
+            {/* Modal */}
+            <RecommendationModal 
+                recommendation={recommendation}
+                onClose={() => setRecommendation(null)}
+                loading={loadingRec}
+            />
 
         </div>
     )

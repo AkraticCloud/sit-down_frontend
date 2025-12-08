@@ -335,3 +335,20 @@ md-text-button.cancel-btn:hover {
 md-text-button.cancel-btn:active {
     background: rgba(255, 82, 82, 0.2) !important;
 }
+
+.ai-gradient {
+    --md-filled-button-container-color: transparent !important;
+    --md-filled-button-label-text-color: white !important;
+
+    background: linear-gradient(135deg, #14ecab, #f8af5c) !important;
+    border-radius: 25px;
+    padding: 12px 28px !important;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(255, 107, 53, 0.3);
+}
+
+.ai-gradient:hover {
+    background: linear-gradient(135deg,  #3fe741,  #3fe741) !important;
+    box-shadow: 0 6px 14px rgba(255, 107, 53, 0.45);
+}
