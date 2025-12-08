@@ -1,30 +1,17 @@
 import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
-
+import WheelOfIndecision from './WheelOfIndecision';
 //useState stores which restaurant is currently selected
 import '@material/web/all.js';
 import './AppHomePage.css';
 import LocationButton from './LocationButton';
 
-//helper: convert degrees to radians for SVG math
-const degToRad = (deg) => (deg * Math.PI) / 180;
-
-//helper: compute x,y on a circle from center, radius and angle
-const polarToCartesian = (radius, angleDeg) => {
-    const angleRad = degToRad(angleDeg);
-    return {
-        x: radius * Math.cos(angleRad),
-        y: radius * Math.sin(angleRad),
-    };
-};
-
 function AppHomePage() {
     //placeholder restaurants which are replaced when "Use My Location" button is clicked
     //each object holds restaurants' name, info, and image
     const [restaurants, setRestaurants] = useState([
-        { name: 'Chipotle', info: 'Mexican • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=1' },
+        { name: 'Chipotle', address: '123 test address rd', info: 'Mexican • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=1' },
         { name: 'Olive Garden', info: 'Italian • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=2' },
         { name: 'Sushi King', info: 'Japanese • $$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=3' },
         { name: 'Five Guys', info: 'Burgers • $$ • 4.3 ⭐', image: 'https://picsum.photos/800/500?random=4' },
@@ -39,9 +26,6 @@ function AppHomePage() {
     //stores which restaurant is currently being displayed
     const [index, setIndex] = useState(0);
 
-    //track user-entered location
-    const [location, setLocation] = useState('');
-
     //tracks swipe animation state
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -53,9 +37,7 @@ function AppHomePage() {
     const [leftSwipes, setLeftSwipes] = useState(0);
     //controls whether the wheel modal is visible or not
     const [showWheel, setShowWheel] = useState(false);
-    const [selectedRestaurantIndex, setSelectedRestaurantIndex] = useState(null);
-    const [showResultModal, setShowResultModal] = useState(false);
-
+    
     //Stores the current data and time for history tracking
     const[date, setDate] = useState(new Date());
     useEffect(() => {
@@ -96,64 +78,6 @@ function AppHomePage() {
         localStorage.setItem("history", JSON.stringify(history))
     }
 
-    // WHEEL LOGIC:
-    // this function spins the wheel using a random rotation value
-    // then calculates which restaurant the wheel lands on
-    const spinWheel = () => {
-        const wheel = document.getElementById('spinWheel');
-        if (!wheel) return;
-
-        const randomRotation =
-            360 * (3 + Math.floor(Math.random() * 3)) +
-            Math.floor(Math.random() * 360);
-
-        wheel.style.transition = 'transform 6s cubic-bezier(.08,.72,.13,1)';
-        wheel.style.transform = `rotate(${randomRotation}deg)`;
-
-        setTimeout(() => {
-            //angle size of each slice
-            const segmentAngle = 360 / restaurants.length;
-
-            // final wheel rotation reduced to 0–360 range
-            const normalizedRotation = randomRotation % 360;
-
-            // angle where the top pointer is facing after the spin
-            const pointerAngle = (360 - normalizedRotation) % 360;
-            
-            // pick the slice the pointer lands on
-            const selectedIndex = Math.floor(pointerAngle / segmentAngle) % restaurants.length;
-
-            setSelectedRestaurantIndex(selectedIndex);
-            setShowResultModal(true);
-            triggerConfetti();
-        }, 6200);
-
-    };
-
-    //confetti
-    //source:
-    const triggerConfetti = () => {
-        const duration = 1200;
-        const end = Date.now() + duration;
-
-        (function frame() {
-            confetti({
-                particleCount: 6,
-                angle: 60,
-                spread: 55,
-                origin: { x: 0 },
-            });
-            confetti({
-                particleCount: 6,
-                angle: 120,
-                spread: 55,
-                origin: { x: 1 },
-            });
-
-            if (Date.now() < end) requestAnimationFrame(frame);
-        })();
-    };
-
     //applies material 3's text styling
     //added a try/catch
     useEffect(() => {
@@ -163,15 +87,6 @@ function AppHomePage() {
             console.warn('Typography unavailable, continuing without it. E:' + e);
         }
     }, []);
-
-    //colors for SVG wheel slices
-    const sliceColors = ['#E67E22', '#D63031', '#0984E3', '#00B894', '#6C5CE7'];
-
-    //SVG wheel radii + constants
-    const svgSize = 320;
-    const center = svgSize / 2;
-    const radius = 175;
-    const labelRadius = 100;
 
     return (
         <div className="app-home-page">
@@ -186,7 +101,7 @@ function AppHomePage() {
                 <h1 className="home-title">Find Your Next Spot!</h1>
             </div>
 
-            {/* Location Input*/}
+            {/* Use My Location Button*/}
             <LocationButton onResults={(data) => {
                 if(data.length > 0){
                     const formatted = data.map(place => ({
@@ -199,16 +114,7 @@ function AppHomePage() {
                     setIndex(0);
                 }
             }}/>
-            
-            <div className="location-input">
-                <md-outlined-text-field
-                    label="Enter your location"
-                    value={location}
-                    onInput={(e) => setLocation(e.target.value)}
-                    placeholder="Baltimore, MD"
-                ></md-outlined-text-field>
-            </div>
-
+        
 
             {/* Restaurant preview card */}
             <div
@@ -314,135 +220,18 @@ function AppHomePage() {
                     Wheel of Indecision
                 </md-filled-button>
             </div>
-            {/* WHEEL OF INDECISION MODAL */}
-            {/* this displays when the user swipes left too many times */}
-            {/* WHEEL OF INDECISION MODAL */}
+
+            {/*Wheel of Indecision */}
             {showWheel && (
-                <div className="wheel-overlay">
-                    <div className="wheel-container">
-                        <h2 className="wheel-title">Still Can't Decide?</h2>
-                        <p className="wheel-sub">Let fate choose for you 🍀</p>
-
-                        {/* Pointer */}
-                        <div className="wheel-pointer"></div>
-
-                        {/* WHEEL (SVG-based so the slices + text stay aligned) */}
-                        <div className="wheel-wrapper" id="spinWheel">
-                            <svg
-                                className="wheel-svg"
-                                viewBox={`0 0 ${svgSize} ${svgSize}`}
-                            >
-                                {/* translate to center and rotate so 0° starts at the top */}
-                                <g transform={`translate(${center}, ${center}) rotate(-90)`}>
-                                    {restaurants.map((r, i) => {
-                                        const segmentAngle = 360 / restaurants.length;
-                                        const startAngle = i * segmentAngle;
-                                        const endAngle = startAngle + segmentAngle;
-                                        const midAngle = startAngle + segmentAngle / 2;
-
-                                        const { x: x1, y: y1 } = polarToCartesian(radius, startAngle);
-                                        const { x: x2, y: y2 } = polarToCartesian(radius, endAngle);
-
-                                        const largeArcFlag = segmentAngle > 180 ? 1 : 0;
-
-                                        const pathData = [
-                                            'M 0 0',
-                                            `L ${x1} ${y1}`,
-                                            `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-                                            'Z',
-                                        ].join(' ');
-
-                                        const { x: labelX, y: labelY } = polarToCartesian(
-                                            labelRadius,
-                                            midAngle
-                                        );
-
-                                        return (
-                                            <g key={r.name}>
-                                                {/* slice path */}
-                                                <path
-                                                    className="wheel-slice"
-                                                    d={pathData}
-                                                    fill={sliceColors[i % sliceColors.length]}
-                                                />
-                                                {/* label text, rotated to sit inside each slice */}
-                                                <text
-                                                    className="wheel-label"
-                                                    x={labelX}
-                                                    y={labelY}
-                                                    textAnchor="middle"
-                                                    dominantBaseline="middle"
-                                                    transform={`rotate(${midAngle} ${labelX} ${labelY})`}
-                                                >
-                                                    {r.name}
-                                                </text>
-                                            </g>
-                                        );
-                                    })}
-                                </g>
-                            </svg>
-                        </div>
-
-                        {/* BUTTONS */}
-                        <div className="wheel-button-row">
-                            <md-filled-button
-                                class="spin-button buddy-gradient"
-                                onClick={() => spinWheel()}
-                            >
-                                Spin the Wheel 🎡
-                            </md-filled-button>
-
-                            <md-text-button class="cancel-btn" onClick={() => setShowWheel(false)}>
-                                Cancel
-                            </md-text-button>
-                        </div>
-                    </div>
-                </div>
+                <WheelOfIndecision
+                    restaurants={restaurants}
+                    onClose={() => setShowWheel(false)}
+                    onSelectRestaurant={(index) => setIndex(index)}
+                />
             )}
-            {showResultModal && (
-                <div className="wheel-overlay">
-                    <div className="wheel-container">
-                        <h2 className="wheel-title">You got:</h2>
-                        <p className="wheel-sub">
-                            <strong>{restaurants[selectedRestaurantIndex].name}</strong>
-                        </p>
 
-                        <div className="result-button-row">
-                            <div className="result-buttons">
-                                <md-filled-button
-                                    class="spin-button buddy-gradient"
-                                    onClick={() => {
-                                        setIndex(selectedRestaurantIndex);
-                                        setShowResultModal(false);
-                                        setShowWheel(false);
-                                    }}
-                                >
-                                    View Restaurant 🍽️
-                                </md-filled-button>
-
-                                <md-filled-button
-                                    class="spin-button"
-                                    onClick={() => {
-                                        setShowResultModal(false);
-                                        setShowWheel(true);
-                                    }}
-                                >
-                                    Spin Again 🔄
-                                </md-filled-button>
-                            </div>
-                        </div>
-                        <md-text-button class="cancel-btn" onClick={() => {
-                            setShowResultModal(false);
-                            setShowWheel(false);
-                        }}>
-                            Cancel
-                        </md-text-button>
-
-                    </div>
-                </div>
-            )}
         </div>
-    );
+    )
 }
 
 export default AppHomePage;
