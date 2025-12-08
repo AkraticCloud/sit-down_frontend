@@ -96,7 +96,7 @@ function HistoryPage() {
 
                 {/* History list */}
                 <div className="history-list">
-                    {filteredHistory.map(item => (
+                    {filteredHistory.map((item,idx) => (
                         <article key={`${item.name}-${item.time}-${idx}`} className="history-card">
                             <div className="history-image-wrapper">
                                 <img
