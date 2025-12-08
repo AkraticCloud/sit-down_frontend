@@ -77,6 +77,8 @@ function RegistrationPage() {
         <md-filled-text-field
           label="Username"
           type="text"
+          name="username"
+          id="username"
           class="registration-input"
           required
           value={username}
@@ -86,6 +88,8 @@ function RegistrationPage() {
         <md-filled-text-field
           label="Email"
           type="email"
+          name="email"
+          id="email"
           class="registration-input"
           required
           value={email}
@@ -95,6 +99,8 @@ function RegistrationPage() {
         <md-filled-text-field
           label="Password"
           type="password"
+          name="password"
+          id="password"
           class="registration-input"
           required
           value={password}

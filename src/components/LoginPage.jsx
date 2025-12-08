@@ -61,6 +61,8 @@ function LoginPage() {
           label="Email"
           type="email"
           class="login-input"
+          name="email"
+          id="email"
           required
           value={email}
           onInput={e => setEmail(e.target.value)}
@@ -69,6 +71,8 @@ function LoginPage() {
           label="Password"
           type="password"
           class="login-input"
+          name="password"
+          id="password"
           required
           value={password}
           onInput={e => setPassword(e.target.value)}
