@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './HistoryPage.css';
 import { Clock, Heart, Star, X as XIcon } from 'lucide-react';
 import { Link } from "react-router-dom";
+import Logo from './Logo.jsx';
 
 function HistoryPage() {
     const [activeFilter, setActiveFilter] = useState('all');;
@@ -47,6 +48,7 @@ function HistoryPage() {
                                 fill="white"
                             />
                         </svg>
+                    
                     </div>
 
                     <div className="history-title-box">
@@ -95,7 +97,7 @@ function HistoryPage() {
                 {/* History list */}
                 <div className="history-list">
                     {filteredHistory.map(item => (
-                        <article key={item.id} className="history-card">
+                        <article key={`${item.name}-${item.time}-${idx}`} className="history-card">
                             <div className="history-image-wrapper">
                                 <img
                                     src={item.image}

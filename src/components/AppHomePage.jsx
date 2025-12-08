@@ -77,6 +77,7 @@ function AppHomePage() {
 
         history.push(newEntry)
         localStorage.setItem("history", JSON.stringify(history))
+        console.log(newEntry);
     }
 
     //applies material 3's text styling

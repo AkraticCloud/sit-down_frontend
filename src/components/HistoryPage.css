@@ -68,6 +68,22 @@
   fill: white;
 }
 
+.hist
+  .history-logo-circle {
+  position: absolute;
+  top: -25px;
+  left: calc(50% - 240px); 
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #ff9800, #ff6b35);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+
 
 .history-title {
   margin: 0;
