@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ActionButton from './ActionButton';
 
 // LocationButton component allows user to fetch nearby places based on their geolocation
 function LocationButton({ onResults }) {
@@ -69,9 +70,8 @@ function LocationButton({ onResults }) {
 
   // Render a button that shows loading text while fetching location
   return (
-    <button onClick={handleGetLocation} disabled={loading}>
-      {loading ? "Finding nearby restaurants..." : "Use My Location"}
-    </button>
+    <ActionButton label={loading ? "Finding nearby restaurants..." : "Use My Location"} onClick={handleGetLocation} disabled={loading}>
+    </ActionButton>
   );
 }
 
