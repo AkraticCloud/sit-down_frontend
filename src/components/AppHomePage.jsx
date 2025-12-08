@@ -6,6 +6,7 @@ import confetti from 'canvas-confetti';
 //useState stores which restaurant is currently selected
 import '@material/web/all.js';
 import './AppHomePage.css';
+import LocationButton from './LocationButton';
 
 //helper: convert degrees to radians for SVG math
 const degToRad = (deg) => (deg * Math.PI) / 180;
@@ -163,6 +164,9 @@ function AppHomePage() {
             </div>
 
             {/* Location Input*/}
+            <LocationButton/>
+            
+            
             <div className="location-input">
                 <md-outlined-text-field
                     label="Enter your location"
@@ -171,6 +175,8 @@ function AppHomePage() {
                     placeholder="Baltimore, MD"
                 ></md-outlined-text-field>
             </div>
+
+            
 
             {/* Restaurant preview card */}
             <div
