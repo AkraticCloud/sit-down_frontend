@@ -36,15 +36,15 @@ function FavoritesPage(){
                 restaurants: ["Daily Sushi", "Charm City Buffet & Grill", "Sushi Hana"]
             },
             {
-                foodlistname: "Toy List",
+                foodlistname: "Toy List 2",
                 restaurants: ["Daily Sushi", "Charm City Buffet & Grill", "Sushi Hana"]
             },
             {
-                foodlistname: "Toy List",
+                foodlistname: "Toy List 3",
                 restaurants: ["Daily Sushi", "Charm City Buffet & Grill", "Sushi Hana"]
             },
             {
-                foodlistname: "Toy List",
+                foodlistname: "Toy List 4",
                 restaurants: ["Daily Sushi", "Charm City Buffet & Grill", "Sushi Hana"]
             },  
         ])
@@ -133,6 +133,7 @@ function FavoritesPage(){
             <section className="foodlist-list-container">
                 {toyListArr.map((list, index) => (
                     <section 
+                        key={index}
                         className="foodlist-row"
                         onClick={() => {
                                 setCurrentList(index)
@@ -149,13 +150,19 @@ function FavoritesPage(){
             <section className="current-foodlist-container">
                 <h1>{toyListArr[currentList].foodlistname}</h1>
                 <md-divider></md-divider>
-                {toyListArr[currentList].restaurants.map((list) => (
-                    <section className="foodlist-row">
-                        <section className="foodlist-row-content">
-                            <h3>{list}</h3>
+                {toyListArr[currentList].restaurants.length > 0 ? (
+                    toyListArr[currentList].restaurants.map((restaurant, index) => (
+                        <section key={index} className="foodlist-row">
+                            <section className="foodlist-row-content">
+                                <h3>{restaurant}</h3>
+                            </section>
                         </section>
-                    </section>
-                ))}
+                    ))
+                ) : (
+                    <div className="favorites-empty">
+                        No restaurants in this list yet. Start swiping to add some favorites!
+                    </div>
+                )}
             </section>
         </div>
     )
