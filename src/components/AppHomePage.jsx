@@ -99,14 +99,12 @@ function AppHomePage() {
     const getAIRecommendation = async () => {
         setLoadingRec(true);
         const history = JSON.parse(localStorage.getItem("history")) || [];
-        const userPreferences = JSON.parse(localStorage.getItem("preferences")) || {};
-        console.log(userPreferences)
         
         try {
             const res = await fetch("https://sit-down-backend.vercel.app/ai/recommend", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ history, preferences: userPreferences })
+                body: JSON.stringify({ history, nearbyRestaurants: restaurants})
             });
             
             
@@ -185,7 +183,7 @@ function AppHomePage() {
                 <h3>Buddy Mode</h3>
                 <md-filled-button className="buddy-gradient">Enable Buddy Mode</md-filled-button>
             </div>
-            
+
             <div className="ai-mode">
                 <md-filled-button className="ai-gradient" onClick={getAIRecommendation} disabled={loadingRec}>
                     {loadingRec ? "Loading..." : "Get AI Recommendation 🤖"}
