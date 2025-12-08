@@ -10,16 +10,16 @@ import LocationButton from './LocationButton';
 function AppHomePage() {
     //placeholder restaurants which are replaced when "Use My Location" button is clicked
     const [restaurants, setRestaurants] = useState([
-    { name: 'Chipotle', address: '1 W Pennsylvania Ave, Towson, MD 21204', info: 'Mexican • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=1' },
-    { name: 'Olive Garden', address: '1721 E Joppa Rd, Towson, MD 21286', info: 'Italian • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=2' },
-    { name: 'Sushi King', address: '102 W Pennsylvania Ave, Towson, MD 21204', info: 'Japanese • $$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=3' },
-    { name: 'Five Guys', address: '469 York Rd, Towson, MD 21204', info: 'Burgers • $$ • 4.3 ⭐', image: 'https://picsum.photos/800/500?random=4' },
-    { name: 'Panda Express', address: '825 Dulaney Valley Rd, Towson, MD 21204', info: 'Chinese • $ • 4.1 ⭐', image: 'https://picsum.photos/800/500?random=5' },
-    { name: 'CAVA', address: '1 Olympic Pl, Towson, MD 21204', info: 'Mediterranean • $$ • 4.5 ⭐', image: 'https://picsum.photos/800/500?random=6' },
-    { name: 'Texas Roadhouse', address: '8775 Centre Park Dr, Columbia, MD 21045', info: 'Steakhouse • $$ • 4.4 ⭐', image: 'https://picsum.photos/800/500?random=7' },
-    { name: "Nando's", address: '300 E Pratt St, Baltimore, MD 21202', info: 'Peri-Peri • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=8' },
-    { name: "P.F. Chang's", address: '600 E Pratt St, Baltimore, MD 21202', info: 'Asian Fusion • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=9' },
-    { name: 'The Melting Pot', address: '47 W Jefferson St, Rockville, MD 20850', info: 'Fondue • $$$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=10' },
+    { name: 'Chipotle', address: '6314 York Rd Baltimore, MD 21212', info: 'Mexican • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=1' },
+    { name: 'Olive Garden', address: '8315 Benson Dr Columbia, MD 21045', info: 'Italian • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=2' },
+    { name: 'Sushi King', address: '6490 Dobbin Rd Suite F, Columbia, MD 21045', info: 'Japanese • $$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=3' },
+    { name: 'Five Guys', address: '936 York Rd Towson, MD 21204', info: 'Burgers • $$ • 4.3 ⭐', image: 'https://picsum.photos/800/500?random=4' },
+    { name: 'Panda Express', address: '8000 York Rd Towson, MD 21252', info: 'Chinese • $ • 4.1 ⭐', image: 'https://picsum.photos/800/500?random=5' },
+    { name: 'CAVA', address: '2129-A York Rd Timonium, MD 21093', info: 'Mediterranean • $$ • 4.5 ⭐', image: 'https://picsum.photos/800/500?random=6' },
+    { name: 'Texas Roadhouse', address: '8820 Stanford Blvd Columbia, MD 21045', info: 'Steakhouse • $$ • 4.4 ⭐', image: 'https://picsum.photos/800/500?random=7' },
+    { name: "Nando's", address: '1100 Fleet St Baltimore, MD 21202', info: 'Peri-Peri • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=8' },
+    { name: "P.F. Chang's", address: '8342 Honeygo Blvd Nottingham, MD 21236', info: 'Asian Fusion • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=9' },
+    { name: 'The Melting Pot', address: '418 York Rd Ste 420, Towson, MD 21204', info: 'Fondue • $$$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=10' },
 ]);
 
     //stores which restaurant is currently being displayed
