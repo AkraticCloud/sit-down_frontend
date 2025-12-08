@@ -21,9 +21,9 @@ const polarToCartesian = (radius, angleDeg) => {
 };
 
 function AppHomePage() {
-    //placeholder restaurants for now
+    //placeholder restaurants which are replaced when "Use My Location" button is clicked
     //each object holds restaurants' name, info, and image
-    const restaurants = [
+    const [restaurants, setRestaurants] = useState([
         { name: 'Chipotle', info: 'Mexican • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=1' },
         { name: 'Olive Garden', info: 'Italian • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=2' },
         { name: 'Sushi King', info: 'Japanese • $$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=3' },
@@ -34,7 +34,7 @@ function AppHomePage() {
         { name: 'Nando’s', info: 'Peri-Peri • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=8' },
         { name: 'P.F. Chang’s', info: 'Asian Fusion • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=9' },
         { name: 'The Melting Pot', info: 'Fondue • $$$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=10' },
-    ];
+    ]);
 
     //stores which restaurant is currently being displayed
     const [index, setIndex] = useState(0);
@@ -164,8 +164,12 @@ function AppHomePage() {
             </div>
 
             {/* Location Input*/}
-            <LocationButton/>
-            
+            <LocationButton onResults={(data) => {
+                if(data.length > 0){
+                    setRestaurants(data);
+                    setIndex(o);
+                }
+            }}/>
             
             <div className="location-input">
                 <md-outlined-text-field
@@ -176,7 +180,6 @@ function AppHomePage() {
                 ></md-outlined-text-field>
             </div>
 
-            
 
             {/* Restaurant preview card */}
             <div
