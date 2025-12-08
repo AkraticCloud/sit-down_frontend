@@ -2,26 +2,25 @@ import { styles as typescaleStyles } from '@material/web/typography/md-typescale
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import WheelOfIndecision from './WheelOfIndecision';
-//useState stores which restaurant is currently selected
+import RestaurantCard from './RestaurantCard';
 import '@material/web/all.js';
 import './AppHomePage.css';
 import LocationButton from './LocationButton';
 
 function AppHomePage() {
     //placeholder restaurants which are replaced when "Use My Location" button is clicked
-    //each object holds restaurants' name, info, and image
     const [restaurants, setRestaurants] = useState([
-        { name: 'Chipotle', address: '123 test address rd', info: 'Mexican • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=1' },
-        { name: 'Olive Garden', info: 'Italian • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=2' },
-        { name: 'Sushi King', info: 'Japanese • $$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=3' },
-        { name: 'Five Guys', info: 'Burgers • $$ • 4.3 ⭐', image: 'https://picsum.photos/800/500?random=4' },
-        { name: 'Panda Express', info: 'Chinese • $ • 4.1 ⭐', image: 'https://picsum.photos/800/500?random=5' },
-        { name: 'CAVA', info: 'Mediterranean • $$ • 4.5 ⭐', image: 'https://picsum.photos/800/500?random=6' },
-        { name: 'Texas Roadhouse', info: 'Steakhouse • $$ • 4.4 ⭐', image: 'https://picsum.photos/800/500?random=7' },
-        { name: 'Nando’s', info: 'Peri-Peri • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=8' },
-        { name: 'P.F. Chang’s', info: 'Asian Fusion • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=9' },
-        { name: 'The Melting Pot', info: 'Fondue • $$$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=10' },
-    ]);
+    { name: 'Chipotle', address: '1 W Pennsylvania Ave, Towson, MD 21204', info: 'Mexican • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=1' },
+    { name: 'Olive Garden', address: '1721 E Joppa Rd, Towson, MD 21286', info: 'Italian • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=2' },
+    { name: 'Sushi King', address: '102 W Pennsylvania Ave, Towson, MD 21204', info: 'Japanese • $$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=3' },
+    { name: 'Five Guys', address: '469 York Rd, Towson, MD 21204', info: 'Burgers • $$ • 4.3 ⭐', image: 'https://picsum.photos/800/500?random=4' },
+    { name: 'Panda Express', address: '825 Dulaney Valley Rd, Towson, MD 21204', info: 'Chinese • $ • 4.1 ⭐', image: 'https://picsum.photos/800/500?random=5' },
+    { name: 'CAVA', address: '1 Olympic Pl, Towson, MD 21204', info: 'Mediterranean • $$ • 4.5 ⭐', image: 'https://picsum.photos/800/500?random=6' },
+    { name: 'Texas Roadhouse', address: '8775 Centre Park Dr, Columbia, MD 21045', info: 'Steakhouse • $$ • 4.4 ⭐', image: 'https://picsum.photos/800/500?random=7' },
+    { name: "Nando's", address: '300 E Pratt St, Baltimore, MD 21202', info: 'Peri-Peri • $$ • 4.2 ⭐', image: 'https://picsum.photos/800/500?random=8' },
+    { name: "P.F. Chang's", address: '600 E Pratt St, Baltimore, MD 21202', info: 'Asian Fusion • $$ • 4.0 ⭐', image: 'https://picsum.photos/800/500?random=9' },
+    { name: 'The Melting Pot', address: '47 W Jefferson St, Rockville, MD 20850', info: 'Fondue • $$$ • 4.6 ⭐', image: 'https://picsum.photos/800/500?random=10' },
+]);
 
     //stores which restaurant is currently being displayed
     const [index, setIndex] = useState(0);
@@ -106,6 +105,7 @@ function AppHomePage() {
                 if(data.length > 0){
                     const formatted = data.map(place => ({
                         name: place.name,
+                        address: place.address,
                         info: place.primaryType || "Restaurant",  // temporary until you add more details
                         image: "https://picsum.photos/800/500?random=" + Math.random(), // placeholder until photo fetch
                         placeid: place.placeid  // keep for later photo/details fetch
@@ -114,91 +114,38 @@ function AppHomePage() {
                     setIndex(0);
                 }
             }}/>
-        
 
-            {/* Restaurant preview card */}
-            <div
-                className={`restaurant-card 
-                ${isAnimating
-                        ? swipeDirection === 'left'
-                            ? 'swipe-left'
-                            : 'swipe-right'
-                        : swipeDirection === 'left'
-                            ? 'swipe-reset'
-                            : 'enter-from-left'
-                    }`}
-            >
-                {/* Restaurant image changes based on current index */}
-                <img
-                    src={restaurants[index].image}
-                    alt={restaurants[index].name}
-                    className="restaurant-image"
-                />
+            {/* Restaurant Card */}
+            <RestaurantCard
+                restaurant={restaurants[index]}
+                isAnimating={isAnimating}
+                swipeDirection={swipeDirection}
+                onPass={() => {
+                    storeHistory("passed");
 
-                {/* Restaurant name + info changes based on current 
-            index or state*/}
-                <h2>{restaurants[index].name}</h2>
-                <p>{restaurants[index].info}</p>
+                    // track left swipes for wheel activation
+                    const newCount = leftSwipes + 1;
 
-                {/* buttons for like, pass, and favorite
-                    both actions currently move to the next restaurant
-                    future updates: 
-                    - liked restaurants should be stored in the database
-                    - after a set amount of 'swipes' the wheel of indecisison should pop up */}
-                <div className="buttons">
-                    {/* PASS BUTTON */}
-                    <div className="action-button-wrapper pass-wrapper">
-                        <md-filled-button
-                            class="action-button"
-                            onClick={() => {
-                                storeHistory("passed")
-
-                                // track left swipes for wheel activation
-                                const newCount = leftSwipes + 1;
-
-                                // show wheel after 3 consecutive left swipes
-                                if (newCount >= 7) {
-                                    setShowWheel(true);
-                                    setLeftSwipes(0); // reset counter
-                                } else {
-                                    setLeftSwipes(newCount);
-                                    nextRestaurant('left');
-                                }
-                            }}
-                        >
-                            Pass ❌
-                        </md-filled-button>
-                    </div>
-
-                    {/* LIKE BUTTON */}
-                    <div className="action-button-wrapper">
-                        <md-filled-button
-                            class="action-button"
-                            onClick={() => {
-                                storeHistory("liked")
-                                setLeftSwipes(0); // reset streak on non-left swipe
-                                nextRestaurant('right');
-                            }}
-                        >
-                            Like ✅
-                        </md-filled-button>
-                    </div>
-
-                    {/* FAVORITE BUTTON */}
-                    <div className="action-button-wrapper">
-                        <md-filled-button
-                            class="action-button"
-                            onClick={() => {
-                                storeHistory("favorite")
-                                setLeftSwipes(0);
-                                nextRestaurant('right');
-                            }}
-                        >
-                            Favorite ⭐
-                        </md-filled-button>
-                    </div>
-                </div>
-            </div>
+                    // show wheel after 7 consecutive left swipes
+                    if (newCount >= 7) {
+                        setShowWheel(true);
+                        setLeftSwipes(0);
+                    } else {
+                        setLeftSwipes(newCount);
+                        nextRestaurant('left');
+                    }
+                }}
+                onLike={() => {
+                    storeHistory("liked");
+                    setLeftSwipes(0);
+                    nextRestaurant('right');
+                }}
+                onFavorite={() => {
+                    storeHistory("favorite");
+                    setLeftSwipes(0);
+                    nextRestaurant('right');
+                }}
+            />
 
             {/* buddy mode button*/}
             <div className="buddy-mode">
