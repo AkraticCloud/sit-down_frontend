@@ -70,8 +70,7 @@ function LocationButton({ onResults }) {
 
   // Render a button that shows loading text while fetching location
   return (
-    <ActionButton label="Use my location" onClick={handleGetLocation} disabled={loading}>
-      {loading ? "Finding nearby restaurants..." : "Use My Location"}
+    <ActionButton label={loading ? "Finding nearby restaurants..." : "Use My Location"} onClick={handleGetLocation} disabled={loading}>
     </ActionButton>
   );
 }
