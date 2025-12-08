@@ -3,48 +3,9 @@ import './HistoryPage.css';
 import { Clock, Heart, Star, X as XIcon } from 'lucide-react';
 import { Link } from "react-router-dom";
 
-
-const mockHistory = [
-    {
-        id: 1,
-        name: 'Chipotle',
-        info: 'Mexican • $$ • 4.2 ⭐',
-        image: 'https://picsum.photos/800/500?random=11',
-        status: 'liked',
-        time: 'Today • 4:15 PM',
-        location: 'Towson, MD'
-    },
-    {
-        id: 2,
-        name: 'Olive Garden',
-        info: 'Italian • $$ • 4.0 ⭐',
-        image: 'https://picsum.photos/800/500?random=12',
-        status: 'favorite',
-        time: 'Today • 3:42 PM',
-        location: 'Baltimore, MD'
-    },
-    {
-        id: 3,
-        name: 'Five Guys',
-        info: 'Burgers • $$ • 4.3 ⭐',
-        image: 'https://picsum.photos/800/500?random=13',
-        status: 'passed',
-        time: 'Yesterday • 8:10 PM',
-        location: 'Towson, MD'
-    },
-    {
-        id: 4,
-        name: 'Sushi King',
-        info: 'Japanese • $$ • 4.6 ⭐',
-        image: 'https://picsum.photos/800/500?random=14',
-        status: 'liked',
-        time: 'Dec 3 • 7:21 PM',
-        location: 'Baltimore, MD'
-    },
-];
-
 function HistoryPage() {
     const [activeFilter, setActiveFilter] = useState('all');;
+    const [mockHistory, setHistory] = useState(JSON.parse(localStorage.getItem("history")) || [])
 
     const filteredHistory =
         activeFilter === 'all'
@@ -122,6 +83,13 @@ function HistoryPage() {
                     >
                         Passed
                     </button>
+                    <button 
+                        className='history-filter-chip'
+                        onClick={ () =>{
+                            localStorage.clear(); 
+                            console.log("test")
+                            setHistory([])
+                    }}>Clear</button>
                 </div>
 
                 {/* History list */}
