@@ -56,6 +56,18 @@ function AppHomePage() {
     const [selectedRestaurantIndex, setSelectedRestaurantIndex] = useState(null);
     const [showResultModal, setShowResultModal] = useState(false);
 
+    //Stores the current data and time for history tracking
+    const[date, setDate] = useState(new Date());
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setDate(new Date())
+        }, 1000);
+
+        return () => {
+          clearInterval(interval); // Clear the interval when the component unmounts
+        };
+      }, []);
+
     //advances to the next restaurant
     //this function moves to the next restaruant
     //modulus operator makes the list wrap around
@@ -71,14 +83,25 @@ function AppHomePage() {
         }, 400); // match CSS animation time
     };
 
+    const storeHistory = (status) => {
+        let meridian = (date.getHours() < 12) ? "AM" : "PM"
+        let newEntry = restaurants[index]
+        console.log(localStorage.getItem("history"))
+        let history = JSON.parse(localStorage.getItem("history")) || []
+        newEntry.status = status
+        newEntry.time = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} • ${date.getHours() % 12}:${date.getMinutes()} ${meridian}`
+        newEntry.location = "Towson, MD"
+
+        history.push(newEntry)
+        localStorage.setItem("history", JSON.stringify(history))
+    }
+
     // WHEEL LOGIC:
     // this function spins the wheel using a random rotation value
     // then calculates which restaurant the wheel lands on
     const spinWheel = () => {
         const wheel = document.getElementById('spinWheel');
         if (!wheel) return;
-
-        const segmentAngle = 360 / restaurants.length;
 
         const randomRotation =
             360 * (3 + Math.floor(Math.random() * 3)) +
@@ -216,6 +239,8 @@ function AppHomePage() {
                         <md-filled-button
                             class="action-button"
                             onClick={() => {
+                                storeHistory("passed")
+
                                 // track left swipes for wheel activation
                                 const newCount = leftSwipes + 1;
 
@@ -238,6 +263,7 @@ function AppHomePage() {
                         <md-filled-button
                             class="action-button"
                             onClick={() => {
+                                storeHistory("liked")
                                 setLeftSwipes(0); // reset streak on non-left swipe
                                 nextRestaurant('right');
                             }}
@@ -251,6 +277,7 @@ function AppHomePage() {
                         <md-filled-button
                             class="action-button"
                             onClick={() => {
+                                storeHistory("favorite")
                                 setLeftSwipes(0);
                                 nextRestaurant('right');
                             }}

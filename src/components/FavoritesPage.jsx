@@ -5,10 +5,9 @@ import '@material/web/divider/divider.js';
 
 function FavoritesPage(){
     const [currentList, setCurrentList] = useState(0)
-    //TODO - Implement these to pull data from the backend. 
-    // const [currentListData, setCurrentListData] = useState(null)
-    // const [foodListData, setFoodListData] = useState(null)
-    // const tempUname = "test101x9"
+    const [currentListData, setCurrentListData] = useState(null)
+    const [foodListData, setFoodListData] = useState(null)
+    const tempUname = "test101x9"
     const toyListArr = useMemo(() => {
         return([
             {
@@ -54,79 +53,78 @@ function FavoritesPage(){
         document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
     }, []);
 
-    //TODO - Implement these effects to load the user's lists from the backend and load the current lists data. 
-    // useEffect(() =>{
-    //     const createList = async (foodlist_name, restaurant_id, username) => {
-    //         try{
-    //             const response = await fetch(`https://sit-down-backend.vercel.app/action/createlist`, {
-    //                 method: "POST",
-    //                 body: JSON.stringify({
-    //                     foodlist_name: foodlist_name,
-    //                     restaurant_id: restaurant_id,
-    //                     username: username
-    //                 })
-    //             })
+    useEffect(() =>{
+        const createList = async (foodlist_name, restaurant_id, username) => {
+            try{
+                const response = await fetch(`https://sit-down-backend.vercel.app/action/createlist`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        foodlist_name: foodlist_name,
+                        restaurant_id: restaurant_id,
+                        username: username
+                    })
+                })
 
-    //             if (!response.ok) {
-    //                 throw new Error(`HTTP error! status: ${response.status}`);
-    //             }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-    //             const data = await response.json()
-    //             console.log("Data returned:" + data)
-    //         }catch (e){
-    //             console.log(e)
-    //         }
-    //     }
+                const data = await response.json()
+                console.log("Data returned:" + data)
+            }catch (e){
+                console.log(e)
+            }
+        }
 
-    //     createList(toyListArr[0]["foodlist-name"], "test", tempUname)
-    //     createList(toyListArr[1]["foodlist-name"], "test", tempUname)
-    //     createList(toyListArr[2]["foodlist-name"], "test", tempUname)
-    // }, [toyListArr])
+        createList(toyListArr[0]["foodlist-name"], "test", tempUname)
+        createList(toyListArr[1]["foodlist-name"], "test", tempUname)
+        createList(toyListArr[2]["foodlist-name"], "test", tempUname)
+    }, [toyListArr])
 
-    // //Potentially refactor to remove the function assignments, just execute the code in the useEffect
-    // useEffect(() => { //Grabs the foodlists the user has made. 
-    //     const fetchLists = async () => {
-    //         try{
-    //             const response = await fetch(`https://sit-down-backend.vercel.app/action/foodlists/:${tempUname}`)
+    //Potentially refactor to remove the function assignments, just execute the code in the useEffect
+    useEffect(() => { //Grabs the foodlists the user has made. 
+        const fetchLists = async () => {
+            try{
+                const response = await fetch(`https://sit-down-backend.vercel.app/action/foodlists/:${tempUname}`)
 
-    //             if (!response.ok) {
-    //                 throw new Error(`HTTP error! status: ${response.status}`);
-    //             }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-    //             const data = await response.json()
+                const data = await response.json()
 
-    //             setFoodListData(data)
-    //             console.log("Data returned:" + data)
-    //         }catch (e){
-    //             console.log(e)
-    //         }
-    //     }
+                setFoodListData(data)
+                console.log("Data returned:" + data)
+            }catch (e){
+                console.log(e)
+            }
+        }
 
-    //     fetchLists()
-    // }, []);
+        fetchLists()
+    }, []);
 
-    // useEffect(() =>{ //Grabs the contents of the current foodlist. 
-    //     const fetchRestaurants = async () => {
-    //         if(currentList != null){
-    //             try{
-    //                 const response = await fetch(`https://sit-down-backend.vercel.app/action/foodlists/:${tempUname}/:${currentList}`)
+    useEffect(() =>{ //Grabs the contents of the current foodlist. 
+        const fetchRestaurants = async () => {
+            if(currentList != null){
+                try{
+                    const response = await fetch(`https://sit-down-backend.vercel.app/action/foodlists/:${tempUname}/:${currentList}`)
 
-    //                 if (!response.ok) {
-    //                     throw new Error(`HTTP error! status: ${response.status}`);
-    //                 }
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
 
-    //                 const data = await response.json()
+                    const data = await response.json()
 
-    //                 setCurrentListData(data)
-    //                 console.log("Data returned:" + data)
-    //             }catch (e){
-    //                 console.log(e)
-    //             }
-    //         }
-    //     }
+                    setCurrentListData(data)
+                    console.log("Data returned:" + data)
+                }catch (e){
+                    console.log(e)
+                }
+            }
+        }
 
-    //     fetchRestaurants()
-    // }, [currentList]); //Retriggers this effect when the current list changes. 
+        fetchRestaurants()
+    }, [currentList]); //Retriggers this effect when the current list changes. 
 
     return(
         <div className="favorites-page">
