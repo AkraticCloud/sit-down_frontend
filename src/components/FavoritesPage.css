@@ -1,3 +1,7 @@
+md-divider{
+  min-height: 2px;
+}
+
 .favorites-page{
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -59,5 +63,10 @@
                 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.2s ease;
     background-color: #f8f3f3;
-    justify-items: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    overflow-x: visible;
 }
